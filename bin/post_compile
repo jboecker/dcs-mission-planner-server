@@ -1,0 +1,10 @@
+#!/bin/bash
+echo Installing Lua in /app/vendor/lua/bin/lua
+mkdir /app/vendor
+cd /app/vendor
+
+curl -R -O http://www.lua.org/ftp/lua-5.2.3.tar.gz
+tar -xvzf lua-5.2.3.tar.gz
+cd lua-5.2.3
+make linux
+make install INSTALL_TOP=/app/vendor/lua
