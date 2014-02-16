@@ -1,10 +1,18 @@
 #!/bin/bash
 echo Installing Lua in /app/vendor/lua/bin/lua
-mkdir /app/vendor
-cd /app/vendor
+mkdir -p $CACHE_DIR/lua
+cd $CACHE_DIR/lua
 
-curl -R -O http://www.lua.org/ftp/lua-5.2.3.tar.gz
-tar -xvzf lua-5.2.3.tar.gz
-cd lua-5.2.3
-make linux
-make install INSTALL_TOP=/app/vendor/lua
+if [ ! -f $CACHE_DIR/lua/lua-5.2.3/src/lua ]; then
+    echo "-----> Downloading and compiling Lua 5.2.3..."
+    curl -R -O http://www.lua.org/ftp/lua-5.2.3.tar.gz
+    tar -xvzf lua-5.2.3.tar.gz
+    cd lua-5.2.3
+    make linux
+else
+    cd lua-5.2.3
+fi
+echo "-----> Installing Lua 5.2.3 to ${BUILD_DIR}/vendor/lua..."
+make install INSTALL_TOP=${BUILD_DIR}/vendor/lua
+echo "-----> post compile hook done."
+ 
