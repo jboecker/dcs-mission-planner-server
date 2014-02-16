@@ -9,6 +9,7 @@ import subprocess
 import zipfile
 from pprint import pformat
 import io
+import keyvaluestore as kv
 
 def findlua():
     for lua in ["/usr/bin/lua", "/app/vendor/lua/bin/lua"]:
@@ -22,6 +23,21 @@ class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
 
+class KVTestHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.set_header("Content-Type", "text/plain")
+        action = self.get_argument("action", "get", True)
+        key = self.get_argument("key", None, True)
+        
+        if action == "get":
+            if key:
+                self.write(repr(kv.get(key)))
+                self.flush()
+                self.finish()
+        elif action == "set":
+            value = self.get_argument("value", None, True)
+            kv.set(key, value)
+        
 class WebsocketEchoHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         pass
@@ -71,6 +87,7 @@ app = tornado.web.Application([
     (r'/ws/echo', WebsocketEchoHandler),
     (r'/loadtest', MissionLoadTest),
     (r'/dltest', MissionDownloadTest),
+    (r'/kv', KVTestHandler),
 ])
 
 if __name__ == "__main__":
