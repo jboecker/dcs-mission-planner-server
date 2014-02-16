@@ -19,18 +19,25 @@ if os.environ.get("DATABASE_URL"):
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS keyvalue (key varchar primary key, value varchar);")
     
+    kv_cache = {} # we want most read requests to hit the cache
+    
     def set(key, value):
         cur.execute("DELETE FROM keyvalue WHERE key = %s;", (key,))
+        del kv_cache[key]
         if value is not None:
             cur.execute("INSERT INTO keyvalue (key, value) VALUES (%s, %s);", (key, value))
+            kv_cache[key] = value
     
     def get(key):
-        cur.execute("SELECT value FROM keyvalue WHERE key = %s;", (key,))
-        result = cur.fetchone()
-        if result:
-            return result[0]
-        else:
-            return None
+        if key not in kv_cache:
+            cur.execute("SELECT value FROM keyvalue WHERE key = %s;", (key,))
+            result = cur.fetchone()
+            if result:
+                kv_cache[key] = result[0]
+            else:
+                kv_cache[key] = None
+
+        return kv_cache[key]
         
 else:
     # we are running locally, use shelve
