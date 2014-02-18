@@ -262,7 +262,8 @@ app = tornado.web.Application([
     (r'/create_instance/', CreateInstanceHandler),
     (r'/instance_list/', InstanceListHandler),
     (r'/download/', DownloadHandler),
-])
+],
+debug = True)
 
 if __name__ == "__main__":
     app.listen(int(sys.argv[1]))
