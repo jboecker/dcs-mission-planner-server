@@ -252,7 +252,7 @@ class DownloadHandler(tornado.web.RequestHandler):
         miz.close()
         
         self.set_header("Content-Type", "application/octet-stream")
-        self.set_header("Content-Disposition", 'attachment; filename="opr-free_maykop-coop16_planned.miz"')
+        self.set_header("Content-Disposition", 'attachment; filename="%s"' % instance["miz"])
         self.write(miz_buffer.getvalue())
     
 app = tornado.web.Application([
