@@ -25,7 +25,8 @@ if os.environ.get("DATABASE_URL"):
         assert isinstance(key, str)
         assert isinstance(value, str) or value is None
         cur.execute("DELETE FROM keyvalue WHERE key = %s;", (key,))
-        del kv_cache[key]
+        if key in kv_cache:
+            del kv_cache[key]
         if value is not None:
             cur.execute("INSERT INTO keyvalue (key, value) VALUES (%s, %s);", (key, value))
             kv_cache[key] = value
