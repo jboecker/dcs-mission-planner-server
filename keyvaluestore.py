@@ -30,6 +30,7 @@ if os.environ.get("DATABASE_URL"):
         if value is not None:
             cur.execute("INSERT INTO keyvalue (key, value) VALUES (%s, %s);", (key, value))
             kv_cache[key] = value
+        conn.commit()
     
     def get(key, default=None):
         assert isinstance(key, str)
