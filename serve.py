@@ -210,7 +210,7 @@ class MissionLoadTest(tornado.web.RequestHandler):
 
 class DownloadHandler(tornado.web.RequestHandler):
     def get(self):
-        instance = json.loads(kv.get(self.get_argument("instance_id")))
+        instance = json.loads(kv.get("instance-"+self.get_argument("instance_id")))
         admin_pw = self.get_argument("password")
         
         # verify password
