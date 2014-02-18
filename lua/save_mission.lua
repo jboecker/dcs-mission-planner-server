@@ -134,9 +134,6 @@ local func = loadfile("mission.tmp", nil, env)
 func()
 mission = env.mission
 
-
-print("working...")
-
 local routes = {}
 local second_waypoints_by_group_name = {}
 for _, obj in pairs(data.objects) do
