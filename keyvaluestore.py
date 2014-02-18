@@ -22,13 +22,16 @@ if os.environ.get("DATABASE_URL"):
     kv_cache = {} # we want most read requests to hit the cache
     
     def set(key, value):
+        assert isinstance(key, str)
+        assert isinstance(value, str) or value is None
         cur.execute("DELETE FROM keyvalue WHERE key = %s;", (key,))
         del kv_cache[key]
         if value is not None:
             cur.execute("INSERT INTO keyvalue (key, value) VALUES (%s, %s);", (key, value))
             kv_cache[key] = value
     
-    def get(key):
+    def get(key, default=None):
+        assert isinstance(key, str)
         if key not in kv_cache:
             cur.execute("SELECT value FROM keyvalue WHERE key = %s;", (key,))
             result = cur.fetchone()
@@ -36,8 +39,12 @@ if os.environ.get("DATABASE_URL"):
                 kv_cache[key] = result[0]
             else:
                 kv_cache[key] = None
-
-        return kv_cache[key]
+        
+        ret = kv_cache[key]
+        if ret is None:
+            return default
+        else:
+            return ret
         
 else:
     # we are running locally, use shelve
@@ -45,10 +52,16 @@ else:
     s = shelve.open("devdata.db")
     
     def get(key, default=None):
+        assert isinstance(key, str)
         if key in s:
             return s[key]
         else:
             return default
             
     def set(key, value):
-        s[key] = value
+        assert isinstance(key, str)
+        assert isinstance(value, str) or value is None
+        if key in s:
+            del s[key]
+        if value is not None:
+            s[key] = value

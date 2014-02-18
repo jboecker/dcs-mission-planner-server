@@ -8,11 +8,8 @@
     <p>
       <form method="POST" action="/create_instance/">
         <select name="miz">
-          {% for k, v in mizlist %}
-          <option value="{{ k }}">{{ v }}</option>
-          {% end %}
+          <option value="opr-free_maykop-coop16.miz">Operation Free Maykop</option>
         </select>
-        <input type="checkbox" name="no_passwords"></input><label for="no_passwords">no passwords</label>
         <input type="submit" value="Create New Instance"></input>
       </form>
     </p>

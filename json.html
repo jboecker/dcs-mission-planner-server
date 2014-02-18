@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% autoescape None %}
+<html>
+  <head>
+
+  </head>
+  <body>
+    <h1>JSON Debug Response</h1>
+    <script>
+      var data = {{ json_encode(data) }};
+      
+      document.write("<pre>"+JSON.stringify(data, indent=2)+"</pre>");
+      console.log(data);
+    </script>
+  </body>
+</html>
