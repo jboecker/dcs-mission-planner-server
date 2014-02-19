@@ -37,6 +37,12 @@ class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html", mizlist=list(mizdict.items()))
 
+class AirportsKmlHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        with open("airports.kml", "r") as f:
+            self.write(f.read())
+
 class WebsocketHandler(tornado.websocket.WebSocketHandler):
     def filter_objects(self, objects):
         """
@@ -211,6 +217,7 @@ app = tornado.web.Application([
     (r'/', IndexHandler),
     (r'/js/(.*)', tornado.web.StaticFileHandler, {'path': 'js/'}),
     (r'/websocket/', WebsocketHandler),
+    (r'/airports.kml', AirportsKmlHandler),
 ],
 debug = True)
 

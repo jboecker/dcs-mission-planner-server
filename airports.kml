@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Aeropuertos DCS World.kmz</name>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin2</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin2</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin">
+		<IconStyle>
+			<color>ff0055aa</color>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin0">
+		<IconStyle>
+			<color>ff0055aa</color>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin">
+		<IconStyle>
+			<color>ff0000ff</color>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin0">
+		<IconStyle>
+			<color>ff0055aa</color>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin2">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin1">
+		<IconStyle>
+			<color>ff0000ff</color>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin2">
+		<IconStyle>
+			<color>ff0000ff</color>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin1">
+		<IconStyle>
+			<color>ff0055aa</color>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin2">
+		<IconStyle>
+			<color>ff0000ff</color>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Folder>
+		<name>Aeropuertos DCS World</name>
+		<Placemark>
+			<name>Kobuleti (UG5X)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 133.000 MHz
+<b>TACAN:</b> 67X "KBL"
+<b>ILS RWY 07:</b> 111.50 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>41.873596358695</longitude>
+				<latitude>41.92765166331918</latitude>
+				<altitude>0</altitude>
+				<heading>0.0213356049345228</heading>
+				<tilt>0</tilt>
+				<range>3626.495210489445</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>41.86470945323262,41.92860006617441,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Gudauta (UG23)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 130.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>40.60934260233483</longitude>
+				<latitude>43.10058317924979</latitude>
+				<altitude>0</altitude>
+				<heading>0.01938329316699795</heading>
+				<tilt>0</tilt>
+				<range>7298.22840593346</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>40.578649529286,43.10253855547266,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Tbilisi - Soganlug (UG24)</name>
+			<description><![CDATA[<b>Closed airfield</b>
+<pre><b>TWR:</b> 139.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>44.95591945822898</longitude>
+				<latitude>41.64738601660832</latitude>
+				<altitude>0</altitude>
+				<heading>0.01466573654389263</heading>
+				<tilt>0</tilt>
+				<range>4688.775985114031</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>44.93515032687544,41.64928115159099,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Vaziani (UG27)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 140.000 MHz
+<b>TACAN:</b> 22X "VAS"
+<b>ILS:</b>
+<b>RWY 13</b> - 108.75 MHz 
+<b>RWY 31</b> - 108.75 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>45.06942956905785</longitude>
+				<latitude>41.6246717353154</latitude>
+				<altitude>0</altitude>
+				<heading>0.01103899078127762</heading>
+				<tilt>6.568701191105313</tilt>
+				<range>7304.291964698897</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>45.03142069081005,41.62878153317956,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Senaki (UGKS)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 132.000 MHz
+<b>TACAN:</b> 31X "TSK"
+<b>ILS RWY 09:</b> 109.40 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>42.07535460990712</longitude>
+				<latitude>42.24154938977346</latitude>
+				<altitude>0</altitude>
+				<heading>0.02446565568808349</heading>
+				<tilt>0</tilt>
+				<range>6461.919271431334</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>42.05002101519762,42.24277219424876,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Batumi (UGSB)</name>
+			<description><![CDATA[<b>Civil aerodrome</b>
+<pre><b>TWR:</b> 131.000 MHz
+<b>TACAN:</b> 16X "BTM"
+<b>ILS RWY 12:</b> 110.30 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>41.62441501884381</longitude>
+				<latitude>41.60662807173603</latitude>
+				<altitude>0</altitude>
+				<heading>0.01913379969874247</heading>
+				<tilt>0</tilt>
+				<range>5931.640545020516</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>41.59918386179583,41.61037736527435,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sukhumi (UGSS)</name>
+			<description><![CDATA[<b>Civil & Military aerodrome</b>
+<pre><b>TWR:</b> 129.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>41.17645357301907</longitude>
+				<latitude>42.85904208876396</latitude>
+				<altitude>0</altitude>
+				<heading>0.01069041251767126</heading>
+				<tilt>0</tilt>
+				<range>10020.89815360026</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>41.12696348454809,42.85973456790198,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Tbilisi - Lochini (UGTB)</name>
+			<description><![CDATA[<b>Civil aerodrome</b>
+<pre><b>TWR:</b> 138.000 MHz
+<b>ILS:</b>
+<b>RWY 12R</b> - 110.30 MHz
+<b>RWY 30L</b> - 108.90 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>44.99977819282717</longitude>
+				<latitude>41.66408548360707</latitude>
+				<altitude>0</altitude>
+				<heading>0.03788587994991952</heading>
+				<tilt>0</tilt>
+				<range>9802.449688646957</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>44.95352462306406,41.6704968845362,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Kutaisi - Kopintnari (UGKO)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 134.000 MHz
+<b>TACAN:</b> 44X "KTS"
+<b>ILS RWY 07:</b> 109.40 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>42.50767548940704</longitude>
+				<latitude>42.17022564965096</latitude>
+				<altitude>0</altitude>
+				<heading>-0.07686277443064958</heading>
+				<tilt>20.44046613958201</tilt>
+				<range>5897.656385038132</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Point>
+				<coordinates>42.48258566150598,42.17638386350637,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Kobuleti Muhaestate</name>
+			<description><![CDATA[<b>Closed aerodrome</b>]]></description>
+			<LookAt>
+				<longitude>41.81651369004958</longitude>
+				<latitude>41.83757489587303</latitude>
+				<altitude>0</altitude>
+				<heading>-2.004376555339662</heading>
+				<tilt>13.17385263409644</tilt>
+				<range>3399.242167101477</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin1</styleUrl>
+			<Point>
+				<coordinates>41.79937967220473,41.83989001176514,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Kutaisi City</name>
+			<description><![CDATA[<b>Closed aerodrome</b>]]></description>
+			<LookAt>
+				<longitude>42.67065367123772</longitude>
+				<latitude>42.26775442196229</latitude>
+				<altitude>0</altitude>
+				<heading>0.01539292614396507</heading>
+				<tilt>27.78788910558714</tilt>
+				<range>3783.444753633646</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin1</styleUrl>
+			<Point>
+				<coordinates>42.6596997466458,42.26545878649465,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Kutaisi West</name>
+			<description><![CDATA[<b>Closed aerodrome</b>]]></description>
+			<LookAt>
+				<longitude>42.63517876189404</longitude>
+				<latitude>42.25277361338711</latitude>
+				<altitude>0</altitude>
+				<heading>-0.008463143944014035</heading>
+				<tilt>27.78800167719847</tilt>
+				<range>3810.328274129487</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin1</styleUrl>
+			<Point>
+				<coordinates>42.62612881455868,42.25163087849206,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Anapa - Vityazevo (URKA)</name>
+			<description><![CDATA[<b>Civil & Military aerodrome</b>
+<pre><b>TWR:</b> 121.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>37.37182863432726</longitude>
+				<latitude>44.99593235795728</latitude>
+				<altitude>0</altitude>
+				<heading>0.03070347602120545</heading>
+				<tilt>2.334091421399689</tilt>
+				<range>5659.634430390116</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin0</styleUrl>
+			<Point>
+				<coordinates>37.34504596136498,45.00244070860866,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Gelendzihik (URKG)</name>
+			<description><![CDATA[<b>Civil aerodrome</b>
+<pre><b>TWR</b> 126.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>38.05860011894279</longitude>
+				<latitude>44.57573742304352</latitude>
+				<altitude>0</altitude>
+				<heading>0.03177112739596587</heading>
+				<tilt>0</tilt>
+				<range>8196.16861297065</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>38.01290032664738,44.58137846059812,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Maykop - Khanskaya (URKH)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 125.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>40.06741055012833</longitude>
+				<latitude>44.67642562003078</latitude>
+				<altitude>0</altitude>
+				<heading>0.05334415799922096</heading>
+				<tilt>1.453038949797188</tilt>
+				<range>6715.766674142235</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>40.0346291756705,44.67976020180979,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Krasnodar - Pashkovsky (URKK)</name>
+			<description><![CDATA[<b>Civil & Military aerodrome</b>
+<pre><b>TWR:</b> 128.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>39.2429566328311</longitude>
+				<latitude>45.02714135095348</latitude>
+				<altitude>0</altitude>
+				<heading>0.07339184833394304</heading>
+				<tilt>0</tilt>
+				<range>15290.09100661637</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>39.16745830983402,45.03410780416163,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Krasnodar - Center (URKL)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 122.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>39.00308064796549</longitude>
+				<latitude>45.06474680242376</latitude>
+				<altitude>0</altitude>
+				<heading>0.02343900377981947</heading>
+				<tilt>0</tilt>
+				<range>10685.41149540136</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>38.9461544331632,45.08103505564959,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Novorossiysk (URKN)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 123.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>37.78426072310494</longitude>
+				<latitude>44.67007747817689</latitude>
+				<altitude>0</altitude>
+				<heading>0.008897112933029115</heading>
+				<tilt>6.182198216405354</tilt>
+				<range>1791.623389504469</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>37.77602897084142,44.6701197217322,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Krymsk (URKW)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 124.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>38.03765082422482</longitude>
+				<latitude>44.95839563267844</latitude>
+				<altitude>0</altitude>
+				<heading>0.03687537556436098</heading>
+				<tilt>0.7488453275220676</tilt>
+				<range>7408.461494630396</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin0</styleUrl>
+			<Point>
+				<coordinates>37.99971200497142,44.96303659722209,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Mineralnye Vody (URMM)</name>
+			<description><![CDATA[<b>Civil aerodrome</b>
+<pre><b>TWR:</b> 135.000 MHz
+<b>ILS:
+<b>RWY 11</b> - 111.70 MHz
+<b>RWY 29</b> - 109.30 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>43.13744342676009</longitude>
+				<latitude>44.2183454087303</latitude>
+				<altitude>0</altitude>
+				<heading>0.0196214133225778</heading>
+				<tilt>0</tilt>
+				<range>11422.78993578452</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>43.07983553654951,44.22478636350156,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Nalchik (URMN)</name>
+			<description><![CDATA[<b>Civil aerodrome</b>
+<pre><b>TWR:</b> 136.000 MHz
+<b>ILS RWY 23:</b> 110.50 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>43.67467632250968</longitude>
+				<latitude>43.50741462711731</latitude>
+				<altitude>0</altitude>
+				<heading>0.03486776807944288</heading>
+				<tilt>3.160304926883339</tilt>
+				<range>7467.199915157547</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>43.6375670631562,43.51203960671346,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Beslan (URMO)</name>
+			<description><![CDATA[<b>Civil aerodrome</b>
+<pre><b>TWR:</b> 141.000 MHz
+<b>ILS RWY 09:</b> 110.50 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>44.64246616267646</longitude>
+				<latitude>43.20000515112978</latitude>
+				<altitude>0</altitude>
+				<heading>0.05801183220861617</heading>
+				<tilt>1.190316439361866</tilt>
+				<range>8011.57023612239</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>44.6061409994905,43.20398295853252,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Sochi - Adler (URSS)</name>
+			<description><![CDATA[<b>Civil aerodrome</b>
+<pre><b>TWR:</b> 127.000 MHz
+<b>ILS RWY 06:</b> 111.10 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>39.97062985762403</longitude>
+				<latitude>43.43871489176321</latitude>
+				<altitude>0</altitude>
+				<heading>0.03140357089076254</heading>
+				<tilt>3.640630992647061</tilt>
+				<range>6489.785941056428</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>39.94482904525308,43.44454309412758,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Mozdok (XRMF)</name>
+			<description><![CDATA[<b>Military aerodrome</b>
+<pre><b>TWR:</b> 137.000 MHz</pre>]]></description>
+			<LookAt>
+				<longitude>44.67764903944157</longitude>
+				<latitude>43.76936419927839</latitude>
+				<altitude>0</altitude>
+				<heading>0.06789896566671309</heading>
+				<tilt>14.36433777339076</tilt>
+				<range>16625.35507596099</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Point>
+				<coordinates>44.59683585221485,43.78383120189837,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
