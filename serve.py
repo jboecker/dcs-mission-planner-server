@@ -37,53 +37,6 @@ class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html", mizlist=list(mizdict.items()))
 
-class CreateInstanceHandler(tornado.web.RequestHandler):
-    def post(self):
-        instance_id = kv.get("next_instance_id") or "1"
-        kv.set("next_instance_id", base36encode(int(instance_id, 36) + 1))
-        
-        instance = {}
-        instance["id"] = instance_id
-        instance["miz"] = self.get_argument("miz")
-        instance["mizname"] = mizdict[instance["miz"]]
-        if self.get_argument("no_passwords", None) == "on":
-            instance["red_pw"] = ""
-            instance["blue_pw"] = ""
-            instance["admin_pw"] = ""
-        else:
-            instance["red_pw"] = util.makepw()
-            instance["blue_pw"] = util.makepw()
-            instance["admin_pw"] = util.makepw()
-        
-        miz = zipfile.ZipFile(os.path.join("missions", instance["miz"]))
-        mission_str = miz.read("mission")
-        miz.close()
-        
-        p = subprocess.Popen([findlua(), "load_mission.lua"], cwd="lua", stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        stdoutdata, stderrdata = p.communicate(input=mission_str, timeout=20)
-        
-        instance["data"] = json.loads(stdoutdata.decode("utf-8"))
-        
-        for obj in instance["data"]["objects"].values():
-            if "x" in obj and "z" in obj:
-                obj["lon"], obj["lat"] = dcs_proj(obj["z"], obj["x"], inverse=True)
-                del obj["z"]
-                del obj["x"]
-        
-        kv.set("instance-"+instance_id, json.dumps(instance))
-
-        instance_list = json.loads(kv.get("instance-list", "[]"))
-        instance_list.append(instance_id)
-        while len(instance_list) > MAX_INSTANCES:
-            kv.set("instance-"+instance_list[0], None)
-            del instance_list[0]
-        kv.set("instance-list", json.dumps(instance_list))
-        self.render("create_instance.html", instance=instance)
-
-class InstanceListHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.render("json.html", data=json.loads(kv.get("instance-list")))
-        
 class WebsocketHandler(tornado.websocket.WebSocketHandler):
     def filter_objects(self, objects):
         """
@@ -132,6 +85,64 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
 
     def handle_ping_request(self, msg):
         return { "success": True }
+
+    def handle_create_instance_request(self, msg):
+        instance_id = kv.get("next_instance_id") or "1"
+        kv.set("next_instance_id", base36encode(int(instance_id, 36) + 1))
+        
+        instance = {}
+        instance["id"] = instance_id
+        instance["mizname"] = msg["filename"]
+        if msg["no_passwords"]:
+            instance["red_pw"] = ""
+            instance["blue_pw"] = ""
+            instance["admin_pw"] = ""
+        else:
+            instance["red_pw"] = util.makepw()
+            instance["blue_pw"] = util.makepw()
+            instance["admin_pw"] = util.makepw()
+        
+        instance["data"] = msg["data"]
+        
+        for obj in instance["data"]["objects"].values():
+            if "x" in obj and "z" in obj:
+                obj["lon"], obj["lat"] = dcs_proj(obj["z"], obj["x"], inverse=True)
+                del obj["z"]
+                del obj["x"]
+        
+        kv.set("instance-"+instance_id, json.dumps(instance))
+
+        instance_list = json.loads(kv.get("instance-list", "[]"))
+        instance_list.append(instance_id)
+        while len(instance_list) > MAX_INSTANCES:
+            kv.set("instance-"+instance_list[0], None)
+            del instance_list[0]
+        kv.set("instance-list", json.dumps(instance_list))
+        
+        return { "success": True,
+                 "instance_id": instance_id,
+                 "red_pw": instance["red_pw"],
+                 "blue_pw": instance["blue_pw"],
+                 "admin_pw": instance["admin_pw"],
+        }
+        
+    
+    def handle_save_mission_request(self, msg):
+        instance = json.loads(kv.get("instance-"+msg["instance_id"]))
+        admin_pw = msg["admin_pw"]
+        
+        # verify password
+        if admin_pw != instance["admin_pw"]:
+            return { "success": False, "error_msg": "Invalid password." }
+        
+        data_copy = json.loads(json.dumps(instance["data"]))
+        for obj in data_copy["objects"].values():
+            if "lat" in obj and "lon" in obj:
+                z, x = dcs_proj(obj["lon"], obj["lat"])
+                obj["z"] = z
+                obj["x"] = x
+
+        return { "success": True, "data": data_copy }
 
     def handle_login_request(self, msg):
         global next_id_prefix_int
@@ -192,76 +203,14 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         return { "success": True, "transaction_applied": True, "changeset": changeset }
 
     def on_close(self):
-        logged_in_websockets.remove(self)
+        if self in logged_in_websockets:
+            logged_in_websockets.remove(self)
 
-class MissionLoadTest(tornado.web.RequestHandler):
-    def get(self):
-        miz = zipfile.ZipFile("missions/opr-free_maykop-coop16.miz")
-        mission_str = miz.read("mission")
-        miz.close()
-        
-        p = subprocess.Popen([findlua(), "lua2json.lua"], cwd="lua", stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        stdoutdata, stderrdata = p.communicate(input=mission_str, timeout=20)
-        
-        missiondata = json.loads(stdoutdata.decode("utf-8"))
-        
-        self.set_header("Content-Type", "text/plain")
-        self.write(pformat(missiondata))
-
-class DownloadHandler(tornado.web.RequestHandler):
-    def get(self):
-        instance = json.loads(kv.get("instance-"+self.get_argument("instance_id")))
-        admin_pw = self.get_argument("password")
-        
-        # verify password
-        if admin_pw != instance["admin_pw"]:
-            raise tornado.web.HTTPError(403)
-
-
-        miz_buffer = io.BytesIO()
-        miz = zipfile.ZipFile(miz_buffer, "a")
-        miz_src = zipfile.ZipFile(os.path.join("missions", instance["miz"]), "r")
-
-        
-        # write temp input files for save_mission.lua
-        data_copy = json.loads(json.dumps(instance["data"]))
-        for obj in data_copy["objects"].values():
-            if "lat" in obj and "lon" in obj:
-                z, x = dcs_proj(obj["lon"], obj["lat"])
-                obj["z"] = z
-                obj["x"] = x
-
-        with open("lua/json.tmp", "w") as json_file:
-            json_file.write(json.dumps(instance["data"]))
-        with open("lua/mission.tmp", "wb") as mission_file:
-            mission_file.write(miz_src.read("mission"))
-
-
-        for zipinfo in miz_src.infolist():
-            if zipinfo.filename == "mission":
-                # call save_mission.lua
-                p = subprocess.Popen([findlua(), "save_mission.lua"], cwd="lua",
-                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-                stdoutdata, stderrdata = p.communicate(timeout=20)
-                mission_str = stdoutdata.decode("utf-8")
-                miz.writestr("mission", mission_str)
-            else:
-                miz.writestr(zipinfo, miz_src.read(zipinfo))
-            
-        miz_src.close()
-        miz.close()
-        
-        self.set_header("Content-Type", "application/octet-stream")
-        self.set_header("Content-Disposition", 'attachment; filename="%s"' % instance["miz"])
-        self.write(miz_buffer.getvalue())
     
 app = tornado.web.Application([
     (r'/', IndexHandler),
     (r'/js/(.*)', tornado.web.StaticFileHandler, {'path': 'js/'}),
     (r'/websocket/', WebsocketHandler),
-    (r'/create_instance/', CreateInstanceHandler),
-    (r'/instance_list/', InstanceListHandler),
-    (r'/download/', DownloadHandler),
 ],
 debug = True)
 
