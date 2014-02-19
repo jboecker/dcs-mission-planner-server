@@ -79,51 +79,6 @@ function table.show(t, name, indent)
    return cart .. autoref
 end
 
-
-
-
-
-
-
-
-
-local function find_heli_or_plane_group(name)
-   for k, coalition_name in pairs({"red", "blue"}) do
-      for country_id=1,#mission.coalition[coalition_name].country do
-         for _, heli_or_plane in pairs({"helicopter", "plane"}) do
-            
-            if mission.coalition[coalition_name].country[country_id][heli_or_plane] then
-               for group_id=1,#mission.coalition[coalition_name].country[country_id][heli_or_plane].group do
-                  if mission.coalition[coalition_name].country[country_id][heli_or_plane].group[group_id].name == name then
-                     return coalition_name, country_id, heli_or_plane, group_id
-                     --return "mission.coalition."..coalition_name..".country["..country_id.."].plane.group["..group_id.."]"
-                  end
-               end
-            end
-            
-         end
-      end
-   end
-   return nil, nil, nil, nil
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 local JSON = loadfile("JSON.lua")()
 json_file = io.open("json.tmp", "r")
 data = JSON:decode(json_file:read("*all"))
@@ -134,74 +89,5 @@ local func = loadfile("mission.tmp", nil, env)
 func()
 mission = env.mission
 
-local routes = {}
-local second_waypoints_by_group_name = {}
-for _, obj in pairs(data.objects) do
-   if obj.type == "CLIENT_ACFT_ROUTE" then
-      routes[obj.group_name] = obj.id
-      local first_wpt = data.objects[obj.first_waypoint_id]
-      if first_wpt.next_waypoint_id ~= "" then
-         second_waypoints_by_group_name[obj.group_name] = data.objects[first_wpt.next_waypoint_id]
-      end
-   end
-end
-
-
-
-for group_name, route in pairs(routes) do
-   local coalition_name, country_id, heli_or_plane, group_id = find_heli_or_plane_group(group_name)
-   if coalition_name and country_id and heli_or_plane and group_id then -- there is a group with this name!
-      
-      -- delete existing waypoints
-      local points = mission.coalition[coalition_name].country[country_id][heli_or_plane].group[group_id].route.points
-      for i = #points,2,-1 do
-         points[i] = nil
-      end
-      
-      -- add new waypoints
-      
-      local wpt = second_waypoints_by_group_name[group_name]
-      local i = 2
-      while wpt do
-         local n = i - 2
-         local name = wpt.name
-         if name == "" then name = nil end
-         
-         mission.coalition[coalition_name].country[country_id][heli_or_plane].group[group_id].route.points[i] = {
-            ["x"] = wpt.x,
-            ["y"] = wpt.z,
-            ["name"] = name,
-            ["alt"] = wpt.alt,
-            ["type"] = "Turning Point",
-            ["action"] = "Turning Point",
-            ["alt_type"] = wpt.alt_type,
-            ["formation_template"] = "",
-            ["properties"] = {
-               ["vnav"] = 1,
-               ["scale"] = 0,
-               ["angle"] = 0,
-               ["vangle"] = 0,
-               ["steer"] = 2
-            },
-            ["speed"] = 140,
-            ["ETA_locked"] = false,
-            ["task"] = {
-               ["id"] = "ComboTask",
-               ["params"] = {["tasks"] = {}}
-            },
-            ["speed_locked"] = true
-         }
-         
-
-         if wpt.next_waypoint_id == "" then
-            wpt = nil
-            break
-         else
-            wpt = data.objects[wpt.next_waypoint_id]
-            i = i + 1
-         end
-      end
-   end
-end
 
 io.write(table.show(mission, 'mission'))
