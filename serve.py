@@ -39,9 +39,14 @@ class IndexHandler(tornado.web.RequestHandler):
 
 class AirportsKmlHandler(tornado.web.RequestHandler):
     def get(self):
-        self.set_header("Access-Control-Allow-Origin", "*")
         with open("airports.kml", "r") as f:
+            self.set_header("Access-Control-Allow-Origin", "*")
             self.write(f.read())
+            self.finish()
+    def options(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Allow", "GET")
+        self.finish()
 
 class WebsocketHandler(tornado.websocket.WebSocketHandler):
     def filter_objects(self, objects):
