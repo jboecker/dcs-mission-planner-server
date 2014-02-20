@@ -120,7 +120,9 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         
         for obj in instance["data"]["objects"].values():
             if "x" in obj and "z" in obj:
-                obj["lon"], obj["lat"] = dcs_proj(obj["z"], obj["x"], inverse=True)
+                lon, lat = dcs_proj(obj["z"], obj["x"], inverse=True)
+                obj["lon"] = lon
+                obj["lat"] = lat
                 del obj["z"]
                 del obj["x"]
         
