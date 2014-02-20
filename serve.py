@@ -106,6 +106,7 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         instance = {}
         instance["id"] = instance_id
         instance["mizname"] = msg["filename"]
+        instance["mizhash"] = msg["md5hash"]
         if msg["no_passwords"]:
             instance["red_pw"] = ""
             instance["blue_pw"] = ""
@@ -155,7 +156,7 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
                 obj["z"] = z
                 obj["x"] = x
 
-        return { "success": True, "data": data_copy }
+        return { "success": True, "data": data_copy, "filename": instance["mizname"], "md5hash": instance["mizhash"] }
 
     def handle_login_request(self, msg):
         global next_id_prefix_int
