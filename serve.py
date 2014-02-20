@@ -41,10 +41,12 @@ class AirportsKmlHandler(tornado.web.RequestHandler):
     def get(self):
         with open("airports.kml", "r") as f:
             self.set_header("Access-Control-Allow-Origin", "*")
+            self.set_header("Access-Control-Allow-Headers", self.request.headers.get("Access-Control-Request-Headers", "*"))
             self.write(f.read())
             self.finish()
     def options(self):
         self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", self.request.headers.get("Access-Control-Request-Headers", "*"))
         self.set_header("Allow", "GET")
         self.finish()
 
