@@ -21,7 +21,7 @@ mizdict = {
     "opr-free_maykop-coop16.miz":"Operation Free Maykop",
     "specops-convoy.miz": "Specops Convoy",
 }
-MAX_INSTANCES = 500
+MAX_INSTANCES = 9000
 next_id_prefix_int = 2
 
 logged_in_websockets = []
