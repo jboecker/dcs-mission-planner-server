@@ -163,9 +163,10 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
     def handle_login_request(self, msg):
         global next_id_prefix_int
         
-        instance = json.loads(kv.get("instance-"+msg["instance_id"]))
-        if not instance:
+        instance_json = kv.get("instance-"+msg["instance_id"])
+        if not instance_json:
             return {"success": False, "error_msg": "instance does not exist."}
+        instance = json.loads(instance_json)
         if instance[msg["coalition"]+"_pw"] == msg["password"]:
             self.instance_id = msg["instance_id"]
             self.coalition = msg["coalition"]
