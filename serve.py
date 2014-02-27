@@ -160,6 +160,19 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
 
         return { "success": True, "data": data_copy, "filename": instance["mizname"], "md5hash": instance["mizhash"] }
 
+    def handle_set_mission_state_request(self, msg):
+        instance = json.loads(kv.get("instance-"+msg["instance_id"]))
+        admin_pw = msg["admin_pw"]
+        
+        # verify password
+        if admin_pw != instance["admin_pw"]:
+            return { "success": False, "error_msg": "Invalid password." }
+
+        instance["data"]["missionState"] = msg["missionState"]
+        kv.set("instance-"+msg["instance_id"], json.dumps(instance))
+        
+        return { "success": True }
+
     def handle_login_request(self, msg):
         global next_id_prefix_int
         
