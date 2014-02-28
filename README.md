@@ -10,7 +10,9 @@ The "official" server is hosted on a free Heroku instance and expects connection
 
 To run it manually, simply execute "python3 server.py <server-port>".
 
-You will need to patch the client to use your server.
+Currently, there is no option in the client to choose a different server. You will need to modify the client to use another server.
+
+Note that to keep the database size below the limit of a free Heroku instance, old instances will be deleted when more than 9000 instances have been created. This number is defined in the MAX_INSTANCES variable in serve.py.
 
 License
 =======
