@@ -21,7 +21,7 @@ The server side of the mission planner does not do much. It facilitates communic
 
 Data is stored in a key-value store. All keys are simple strings, most values are encoded as JSON before saving.
 
-Instances are stored under the key "instance-<instance_id>". The key "instance-list" stores a JSON array of all existing instance IDs. The "next_instance_id" key stores the next instance ID to be assigned.
+Instances are stored under the key "instance-\<instance_id\>". The key "instance-list" stores a JSON array of all existing instance IDs. The "next_instance_id" key stores the next instance ID to be assigned.
 
 Instances
 =========
