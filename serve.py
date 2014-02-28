@@ -26,13 +26,6 @@ next_id_prefix_int = 2
 
 logged_in_websockets = []
 
-def findlua():
-    for lua in ["/usr/bin/lua", "/app/vendor/lua/bin/lua"]:
-        if os.path.isfile(lua):
-            return lua
-    raise RuntimeError("could not find lua interpreter")
-findlua()
-
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html", mizlist=list(mizdict.items()))
