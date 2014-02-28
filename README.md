@@ -8,7 +8,7 @@ How to run
 
 The "official" server is hosted on a free Heroku instance and expects connection information for a postgres database in the DATABASE_URL environment variable. If that variable is not set, it will use a file instead.
 
-To run it manually, simply execute "python3 server.py <server-port>".
+To run it manually, simply execute "python3 serve.py \<server-port\>".
 
 Currently, there is no option in the client to choose a different server. You will need to modify the client to use another server.
 
