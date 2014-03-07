@@ -6,13 +6,25 @@ The server component of the DCS: World Mission Planner
 How to run
 ==========
 
-The "official" server is hosted on a free Heroku instance and expects connection information for a postgres database in the DATABASE_URL environment variable. If that variable is not set, it will use a file instead.
+The server requires Python 3 and the modules listed in `requirements.txt`.
 
-To run it manually, simply execute "python serve.py \<server-port\>".
+On Linux, the following commands should get you up and running:
+```bash
+$ git clone git@github.com:jboecker/dcs-mission-planner-server.git
+$ cd dcs-mission-planner-server
+$ virtualenv -p python3 venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+$ cd src
+$ python serve.py 8080
+```
 
-Currently, there is no option in the client to choose a different server. You will need to modify the client to use another server.
+On Windows, you may be interested in the following links:
+* [Python 3.2 64-bit](http://legacy.python.org/ftp//python/3.2.5/python-3.2.5.amd64.msi)
+* [Tornado for Python 3.2 64-bit](http://www.lfd.uci.edu/~gohlke/pythonlibs/gmqofism/tornado-3.2.win-amd64-py3.2.exe)
+* [pyproj for Python 3.2 64-bit](https://code.google.com/p/pyproj/downloads/detail?name=pyproj-1.9.2.win-amd64-py3.2.exe&can=2&q=)
 
-Note that to keep the database size below the limit of a free Heroku instance, old instances will be deleted when more than 9000 instances have been created. This number is defined in the MAX_INSTANCES variable in serve.py.
+Please note that there is no official support for running your own server.
 
 Quick Overview
 ==============
