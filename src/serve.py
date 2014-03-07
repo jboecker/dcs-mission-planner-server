@@ -17,11 +17,6 @@ import util
 import pyproj
 dcs_proj =  pyproj.Proj("+proj=tmerc +lat_0=0 +lon_0=33 +k_0=0.9996 +x_0=-99517 +y_0=-4998115")
 
-mizdict = {
-    "opr-free_maykop-coop16.miz":"Operation Free Maykop",
-    "specops-convoy.miz": "Specops Convoy",
-}
-MAX_INSTANCES = 9000
 next_id_prefix_int = 2
 
 logged_in_websockets = []
@@ -123,9 +118,7 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
 
         instance_list = json.loads(kv.get("instance-list", "[]"))
         instance_list.append(instance_id)
-        while len(instance_list) > MAX_INSTANCES:
-            kv.set("instance-"+instance_list[0], None)
-            del instance_list[0]
+        
         kv.set("instance-list", json.dumps(instance_list))
         
         return { "success": True,
