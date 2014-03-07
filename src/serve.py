@@ -128,7 +128,16 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
                  "admin_pw": instance["admin_pw"],
         }
         
-    
+    def handle_instance_info_request(self, msg):
+        instance = json.loads(kv.get("instance-"+msg["instance_id"]))
+        admin_pw = msg["admin_pw"]
+        
+        # verify password
+        if admin_pw != instance["admin_pw"]:
+            return { "success": False, "error_msg": "Invalid password." }
+        
+        return { "success":True, "instance_id": msg["instance_id"], "admin_pw":instance["admin_pw"], "blue_pw":instance["blue_pw"], "red_pw":instance["red_pw"] }
+
     def handle_save_mission_request(self, msg):
         instance = json.loads(kv.get("instance-"+msg["instance_id"]))
         admin_pw = msg["admin_pw"]
