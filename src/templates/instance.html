@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Instance {{ instance_id }}</h2>
+    <p>
+      You have browsed to the URL of a Mission Planner instance. Entering the URL into the planner application and clicking "Connect" might be more useful.
+    </p>
+    <p>
+      <ul>
+      {% if username == "admin" %}
+      <li><b>Admin URL: </b><code>{{ protocol }}://admin:{{ instance["admin_pw"] }}@{{ host }}/?instance_id={{ instance_id }}</code></li>
+      {% end %}
+      {% if username in ("red", "admin") %}
+      <li><b>Red URL: </b><code>{{ protocol }}://red:{{ instance["red_pw"] }}@{{ host }}/?instance_id={{ instance_id }}</code></li>
+      {% end %}
+      {% if username in ("blue", "admin") %}
+      <li><b>Blue URL: </b><code>{{ protocol }}://blue:{{ instance["blue_pw"] }}@{{ host }}/?instance_id={{ instance_id }}</code></li>
+      {% end %}
+      </ul>
+    </p>
+  </body>
+</html>

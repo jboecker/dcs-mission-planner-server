@@ -22,8 +22,32 @@ next_id_prefix_int = 2
 logged_in_websockets = []
 
 class IndexHandler(tornado.web.RequestHandler):
+    def fail_auth(self, instance_id=""):
+        self.set_header("WWW-Authenticate", 'Basic realm="Mission Planner Instance '+instance_id+'"')
+        self.set_status(401)
+
+        
     def get(self):
-        self.render("index.html", mizlist=list(mizdict.items()))
+        instance_id = self.get_argument("instance_id")
+        instance_json = kv.get("instance-"+instance_id, None)
+        if instance_json is None:
+            return self.send_error(404)
+        instance = json.loads(instance_json)
+        
+        auth_header = self.request.headers.get("Authorization", None)
+        host_header = self.request.headers.get("Host")
+        if not auth_header:
+            return self.fail_auth(instance_id)
+
+        import base64
+        username, password = base64.decodestring(auth_header.split(" ")[1].encode("ascii")).decode("utf-8").split(":")
+        
+        if username not in ("blue", "red", "admin"):
+            return self.fail_auth(instance_id)
+        if instance[username+"_pw"] != password:
+            return self.fail_auth(instance_id)
+            
+        self.render("templates/instance.html", username=username, instance_id=instance_id, instance=instance, host=host_header, protocol=self.request.protocol)
 
 class AirportsKmlHandler(tornado.web.RequestHandler):
     def get(self):
