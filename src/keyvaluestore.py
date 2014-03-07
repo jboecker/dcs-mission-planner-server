@@ -15,3 +15,4 @@ def set(key, value):
         del s[key]
     if value is not None:
         s[key] = value
+        s.sync()
