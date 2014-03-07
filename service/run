@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# run script for djb's daemontools
+
+PORT=8080
+
+cd ..
+source venv/bin/activate
+cd src
+exec python serve.py $PORT
