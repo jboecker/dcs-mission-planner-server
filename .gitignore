@@ -3,7 +3,7 @@ venv
 *~
 \#*
 .\#*
-devdata.db
-devdata.db.bak
-devdata.db.dat
-devdata.db.dir
+src/devdata.db
+src/devdata.db.bak
+src/devdata.db.dat
+src/devdata.db.dir
