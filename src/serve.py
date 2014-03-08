@@ -192,6 +192,19 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         
         return { "success": True }
 
+    def handle_set_liveries_request(self, msg):
+        instance = json.loads(kv.get("instance-"+msg["instance_id"]))
+        admin_pw = msg["admin_pw"]
+        
+        # verify password
+        if admin_pw != instance["admin_pw"]:
+            return { "success": False, "error_msg": "Invalid password." }
+
+        instance["data"]["liveries"] = msg["liveries"]
+        kv.set("instance-"+msg["instance_id"], json.dumps(instance))
+        
+        return { "success": True }
+
     def handle_login_request(self, msg):
         global next_id_prefix_int
         
