@@ -278,6 +278,13 @@ app = tornado.web.Application([
 debug = True)
 
 if __name__ == "__main__":
-    app.listen(int(sys.argv[1]))
-    print("Server running @ port {0} - Hit CTRL-C to quit".format(int(sys.argv[1])))
-    tornado.ioloop.IOLoop.instance().start()
+    if sys.argv[1] == "export":
+        print(json.dumps(kv.as_dict()))
+    elif sys.argv[1] == "import":
+        d = json.loads(sys.stdin.read())
+        for key in d:
+            kv.set(key, d[key])
+    else:
+        app.listen(int(sys.argv[1]))
+        print("Server running @ port {0} - Hit CTRL-C to quit".format(int(sys.argv[1])))
+        tornado.ioloop.IOLoop.instance().start()

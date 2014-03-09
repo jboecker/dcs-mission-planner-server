@@ -16,3 +16,9 @@ def set(key, value):
     if value is not None:
         s[key] = value
         s.sync()
+
+def as_dict():
+    ret = {}
+    for key in s:
+        ret[key] = s[key];
+    return ret
