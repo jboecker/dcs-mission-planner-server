@@ -248,20 +248,24 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         instance["data"]["version"] += 1
         kv.set("instance-"+self.instance_id, json.dumps(instance))
         
-        changeset = msg["transaction"]
-        changeset["version_after"] = instance["data"]["version"]
-        changeset_str = json.dumps({
-            "type": "changeset",
-            "changeset": changeset
-        })
         for ws in logged_in_websockets:
             if ws != self:
                 try:
+                    changeset = msg["transaction"]
+                    changeset["version_after"] = instance["data"]["version"]
+                    changeset = ws.filter_tx(changeset)
+                    changeset_str = json.dumps({
+                        "type": "changeset",
+                        "changeset": changeset
+                    })
                     ws.write_message(changeset_str)
                 except:
                     print("Error sending changeset.")
                     pass
         
+        changeset = msg["transaction"]
+        changeset["version_after"] = instance["data"]["version"]
+        changeset = self.filter_tx(changeset)
         return { "success": True, "transaction_applied": True, "changeset": changeset }
 
     def on_close(self):
