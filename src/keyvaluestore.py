@@ -1,24 +1,28 @@
-import shelve
-s = shelve.open("devdata.db")
+import sqlite3
+conn = sqlite3.connect("data.sqlite3")
+
+conn.execute("CREATE TABLE IF NOT EXISTS data (key text, value text);")
+conn.commit()
 
 def get(key, default=None):
     assert isinstance(key, str)
-    if key in s:
-        return s[key]
-    else:
+    cur = conn.cursor()
+    cur.execute("SELECT value FROM data WHERE key = ?", (key,))
+    result = cur.fetchone()
+    if result is None:
         return default
+    else:
+        return result[0]
 
 def set(key, value):
     assert isinstance(key, str)
     assert isinstance(value, str) or value is None
-    if key in s:
-        del s[key]
-    if value is not None:
-        s[key] = value
-        s.sync()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM data WHERE key = ?", (key,))
+    cur.execute("INSERT INTO data (key, value) VALUES (?, ?)", (key, value))
+    conn.commit()
 
 def as_dict():
-    ret = {}
-    for key in s:
-        ret[key] = s[key];
-    return ret
+    cur = conn.cursor()
+    cur.execute("SELECT key, value FROM data")
+    return dict(cur.fetchall())
