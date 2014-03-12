@@ -5,3 +5,4 @@ venv
 .\#*
 src/data.sqlite3
 service/supervise
+service/down
