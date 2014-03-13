@@ -12,9 +12,11 @@
       {% end %}
       {% if username in ("red", "admin") %}
       <li><b>Red URL: </b><code>{{ protocol }}://red:{{ instance["red_pw"] }}@{{ host }}/?instance_id={{ instance_id }}</code></li>
+      <li><b>Red Spectator URL: </b><code>{{ protocol }}://red:{{ instance["red_spectator_pw"] }}@{{ host }}/?instance_id={{ instance_id }}</code></li>
       {% end %}
       {% if username in ("blue", "admin") %}
       <li><b>Blue URL: </b><code>{{ protocol }}://blue:{{ instance["blue_pw"] }}@{{ host }}/?instance_id={{ instance_id }}</code></li>
+      <li><b>Blue Spectator URL: </b><code>{{ protocol }}://blue:{{ instance["blue_spectator_pw"] }}@{{ host }}/?instance_id={{ instance_id }}</code></li>
       {% end %}
       </ul>
     </p>

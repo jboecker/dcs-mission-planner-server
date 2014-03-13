@@ -117,6 +117,7 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         
         instance = {}
         instance["id"] = instance_id
+        instance["schema_version"] = 1
         instance["mizname"] = msg["filename"]
         instance["mizhash"] = msg["md5hash"]
         if msg["no_passwords"]:
@@ -127,6 +128,9 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
             instance["red_pw"] = util.makepw()
             instance["blue_pw"] = util.makepw()
             instance["admin_pw"] = util.makepw()
+        instance["red_spectator_pw"] = util.makepw()
+        instance["blue_spectator_pw"] = util.makepw()
+
         
         instance["data"] = msg["data"]
         
@@ -149,6 +153,8 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
                  "instance_id": instance_id,
                  "red_pw": instance["red_pw"],
                  "blue_pw": instance["blue_pw"],
+                 "red_spectator_pw": instance["red_spectator_pw"],
+                 "blue_spectator_pw": instance["blue_spectator_pw"],
                  "admin_pw": instance["admin_pw"],
         }
         
@@ -160,7 +166,14 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         if admin_pw != instance["admin_pw"]:
             return { "success": False, "error_msg": "Invalid password." }
         
-        return { "success":True, "instance_id": msg["instance_id"], "admin_pw":instance["admin_pw"], "blue_pw":instance["blue_pw"], "red_pw":instance["red_pw"] }
+        return { "success": True,
+                 "instance_id": msg["instance_id"],
+                 "red_pw": instance["red_pw"],
+                 "blue_pw": instance["blue_pw"],
+                 "red_spectator_pw": instance["red_spectator_pw"],
+                 "blue_spectator_pw": instance["blue_spectator_pw"],
+                 "admin_pw": instance["admin_pw"],
+        }
 
     def handle_save_mission_request(self, msg):
         instance = json.loads(kv.get("instance-"+msg["instance_id"]))
@@ -212,8 +225,10 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         if not instance_json:
             return {"success": False, "error_msg": "instance does not exist."}
         instance = json.loads(instance_json)
-        if instance[msg["coalition"]+"_pw"] == msg["password"]:
+        if instance[msg["coalition"]+"_pw"] == msg["password"] or \
+           instance[msg["coalition"]+"_spectator_pw"] == msg["password"]:
             self.instance_id = msg["instance_id"]
+            self.spectator_mode = (instance[msg["coalition"]+"_spectator_pw"] == msg["password"])
             self.coalition = msg["coalition"]
             logged_in_websockets.append(self)
             id_prefix = base36encode(next_id_prefix_int) + "/"
@@ -227,6 +242,9 @@ class WebsocketHandler(tornado.websocket.WebSocketHandler):
         if not instance:
             return {"success": False, "error_msg": "instance does not exist."}
 
+        if self.spectator_mode:
+            return {"success": True, "transaction_applied": False}
+            
         for key in msg["transaction"]["deleted_object_ids"]:
             if key not in instance["data"]["objects"]:
                 return {"success": True, "transaction_applied": False, "log": "object already deleted: %s" % key}
@@ -288,6 +306,9 @@ if __name__ == "__main__":
         d = json.loads(sys.stdin.read())
         for key in d:
             kv.set(key, d[key])
+    elif sys.argv[1] == "upgrade":
+        import instance_upgrade
+        instance_upgrade.upgrade()
     else:
         app.listen(int(sys.argv[1]))
         print("Server running @ port {0} - Hit CTRL-C to quit".format(int(sys.argv[1])))
