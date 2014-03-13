@@ -19,6 +19,15 @@ def base36encode(number, alphabet='0123456789abcdefghijklmnopqrstuvwxyz'):
 
     return sign + base36
 
-
+pw_history = []     # ensures that no two passwords for one instance are the same
+PW_HISTORY_SIZE = 5 # number of passwords generated per instance
 def makepw():
-    return base36encode(random.randint(1, int("zzzz", 36)))
+    while True:
+        pw = base36encode(random.randint(1, int("zzzz", 36)))
+        if pw not in pw_history:
+            break
+    pw_history.append(pw)
+    while len(pw_history) > PW_HISTORY_SIZE:
+        del pw_history[0]
+    return pw
+
